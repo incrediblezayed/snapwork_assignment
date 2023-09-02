@@ -9,6 +9,9 @@ name: "Release"
 jobs:
   build:
     name: Release
+    permissions:
+      id-token: write
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -24,7 +27,7 @@ jobs:
       - run: flutter update-packages --force-upgrade
       - run: flutter pub get
       - run: flutter build apk
-      - name: Push Test Build
+      - name: Push Build
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*"
