@@ -58,6 +58,16 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "Snapwork_Assignment"
+            def SEP = "_"
+            def date = new Date();
+            def formattedDate = date.format('dd-MM-yyyy_HH:mm')
+            def newApkName = project + SEP  + formattedDate + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
 }
 
 flutter {

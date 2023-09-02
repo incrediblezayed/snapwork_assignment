@@ -1,0 +1,31 @@
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+name: "Release"
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "3.13.0"
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.1.0"
+      - run: flutter update-packages --force-upgrade
+      - run: flutter pub get
+      - run: flutter build apk
+      - name: Push Test Build
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*"
+          tag: v1.0.${{ github.run_number }}
