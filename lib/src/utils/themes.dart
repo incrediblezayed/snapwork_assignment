@@ -6,6 +6,7 @@ class AppTheme {
   static CupertinoThemeData get theme => const CupertinoThemeData(
         primaryColor: _primaryColor,
         barBackgroundColor: _primaryColor,
+        brightness: Brightness.light,
         textTheme: CupertinoTextThemeData(
           navTitleTextStyle: TextStyle(color: CupertinoColors.white),
           actionTextStyle: TextStyle(color: CupertinoColors.white),
